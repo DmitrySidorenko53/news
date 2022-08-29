@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeLeaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{system}"></title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#" th:text="#{system}"></a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'/all_news'}" th:text="#{manage_news}"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'?locale=ru'}">RU</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'?locale=en'}">EN</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="row">
+        <h1 th:text="#{list}"></h1>
+    </div>
+
+    <div class = "row">
+        <div class = "col-lg-3">
+            <a th:href = "@{/all_news/create}" class="btn btn-primary btn-sm md-3"
+            th:text="#{create}">
+            </a>
+        </div>
+    </div>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th th:text="#{title}"> </th>
+            <th th:text="#{date}"> </th>
+            <th th:text="#{brief}"> </th>
+            <th th:text="#{content}"> </th>
+            <th th:text="#{actions}"> </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each = "news: ${all_news}">
+            <td th:text = "${news.title}"></td>
+            <td th:text = "${news.date}"></td>
+            <td th:text = "${news.brief}"></td>
+            <td th:text = "${news.content}"></td>
+            <td>
+                <a th:href = "@{/all_news/edit/{id}(id=${news.id})}"
+                class="btn btn-primary" th:text="#{edit}"></a>
+                <a th:href = "@{/all_news/{id}(id=${news.id})}"
+                   class = "btn btn-danger" th:text="#{delete}"></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
